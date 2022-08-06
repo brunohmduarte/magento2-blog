@@ -1,0 +1,22 @@
+{
+    "name": "brunoduarte/blog",
+    "description": "Blog page of the store",
+    "type": "magento2-module",
+    "license": [ "MIT" ],
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Bruno H. M. Duarte",
+            "email": "brunohmduarte@outlook.com.br",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "BrunoDuarte\\Blog\\": ""
+        }
+    }
+}
