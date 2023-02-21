@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="blog_authors_post" resource="default" engine="innodb" comment="Post authors reference table.">
+        <column xsi:type="int" name="author_id" identity="true" nullable="false" unsigned="false" comment="Author ID"/>
+        <column xsi:type="varchar" name="name" length="100" nullable="false" comment="The name of the author post."/>
+        <column xsi:type="text" name="about" nullable="true" comment="Description about the author." />
+        <column xsi:type="text" name="image_path" nullable="true" comment="The image of the author." />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="author_id"/>
+        </constraint>
+    </table>
+    <table name="blog_post" resource="default" engine="innodb" comment="Blog articles.">
+        <column xsi:type="int" name="post_id" unsigned="false" nullable="false" identity="true" comment="Post ID"/>
+        <column xsi:type="int" name="author_id" unsigned="false" nullable="false" identity="false" comment="Post author identifier."/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false" comment="Post title."/>
+        <column xsi:type="text" name="sub-title" nullable="false" comment="Brief description of the subject."/>
+        <column xsi:type="text" name="text" nullable="false" comment="Article text."/>
+        <column xsi:type="text" name="image_path" nullable="true" comment="The image of the author." />
+        <column xsi:type="int" name="views" length="5" nullable="true" default="0" comment="Number of post views."/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="BLOG_POST_AUTHOR_ID_BLOG_AUTHORS_POST_AUTHOR_ID_FK"
+                    table="blog_post"
+                    column="author_id"
+                    referenceTable="blog_authors_post"
+                    referenceColumn="author_id"
+                    onDelete="NO ACTION"/>
+    </table>
+</schema>
