@@ -1,0 +1,32 @@
+{
+    "blog_authors_post": {
+        "column": {
+            "author_id": true,
+            "name": true,
+            "about": true,
+            "image_path": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "blog_post": {
+        "column": {
+            "post_id": true,
+            "author_id": true,
+            "title": true,
+            "sub-title": true,
+            "text": true,
+            "image_path": true,
+            "views": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "BLOG_POST_AUTHOR_ID_BLOG_AUTHORS_POST_AUTHOR_ID": true
+        }
+    }
+}
