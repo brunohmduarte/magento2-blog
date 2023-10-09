@@ -19,7 +19,7 @@ xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/et
         <column xsi:type="text" name="sub-title" nullable="false" comment="Brief description of the subject."/>
         <column xsi:type="text" name="text" nullable="false" comment="Article text."/>
         <column xsi:type="text" name="image_path" nullable="true" comment="The image of the author." />
-        <column xsi:type="int" name="views" length="5" nullable="true" default="0" comment="Number of post views."/>
+        <column xsi:type="int" name="views" nullable="true" default="0" comment="Number of post views."/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
         <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

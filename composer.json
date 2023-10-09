@@ -1,22 +1,24 @@
 {
     "name": "brunoduarte/blog",
-    "description": "Blog page of the store",
+    "description": "This module is responsible for managing the store's blog posts.",
     "type": "magento2-module",
-    "license": [ "MIT" ],
     "version": "1.0.0",
+    "license": "propietary",
+    "keywords": [
+        "magetno 2",
+        "blog"
+    ],
     "authors": [
         {
             "name": "Bruno H. M. Duarte",
             "email": "brunohmduarte@outlook.com.br",
-            "role": "Developer"
+            "role": "developer"
         }
     ],
     "autoload": {
-        "files": [
-            "registration.php"
-        ],
+        "files": ["registration.php"],
         "psr-4": {
-            "BrunoDuarte\\Blog\\": ""
+            "Bruno\\Duarte\\": ""
         }
     }
 }

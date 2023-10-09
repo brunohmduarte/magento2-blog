@@ -2,22 +2,22 @@
 
 namespace BrunoDuarte\Blog\Model;
 
+use BrunoDuarte\Blog\Model\ResourceModel\Author as AuthorResourceModel;
 use Magento\Framework\{
         DataObject\IdentityInterface,
         Model\AbstractModel,
         Model\Context,
         Registry
-    };
-use BrunoDuarte\Blog\Model\ResourceModel\Post as PostResourceModel;
+};
 
-class Post extends AbstractModel implements IdentityInterface
+class Author extends AbstractModel implements IdentityInterface
 {
     const NOROUTE_ENTITY_ID = 'no-route';
-    const ENTITY_ID = 'post_id';
+    const ENTITY_ID = 'author_id';
     const CACHE_TAG = 'blog_post';
 
-    protected $_cacheTag = 'blog_post';
-    protected $_eventPrefix = 'blog_post';
+    protected $_cacheTag = 'blog_authors_post';
+    protected $_eventPrefix = 'blog_authors_post';
 
     public function __construct(Context $context, Registry $registry)
     {
@@ -26,7 +26,7 @@ class Post extends AbstractModel implements IdentityInterface
 
     public function _construct()
     {
-        $this->_init(PostResourceModel::class);
+        $this->_init(AuthorResourceModel::class);
     }
 
     public function getIdentities()

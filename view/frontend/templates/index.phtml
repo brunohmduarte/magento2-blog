@@ -1,5 +1,3 @@
-<?php /** @var BrunoDuarte\Blog\Block\Index $block */ ?>
+<?php /** @var BrunoDuarte\Blog\Block\Post\Index $this */ ?>
 
-<h1>Deu certo!</h1>
-
-<h4><?php echo $block->getWelcome(); ?></h4>
+<h1><?= $this->getHelloWorldTxt(); ?></h1>

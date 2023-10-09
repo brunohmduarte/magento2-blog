@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="BrunoDuarte_Blog::main_menu"
+             title="Blog Manager"
+             module="BrunoDuarte_Blog"
+             sortOrder="51"
+             resource="BrunoDuarte_Blog::main_menu"/>
+
+        <add id="BrunoDuarte_Blog::author"
+             title="Manage Authors"
+             module="BrunoDuarte_Blog"
+             sortOrder="10"
+             action="blog/author"
+             resource="BrunoDuarte_Blog::author"
+             parent="BrunoDuarte_Blog::main_menu"/>
+
+        <add id="BrunoDuarte_Blog::blog_post"
+             title="Manage Posts"
+             module="BrunoDuarte_Blog"
+             sortOrder="10"
+             action="blog/post"
+             resource="BrunoDuarte_Blog::blog_post"
+             parent="BrunoDuarte_Blog::main_menu"/>
+
+        <add id="BrunoDuarte_Blog::blog_configuration"
+             title="Configuration"
+             module="BrunoDuarte_Blog"
+             sortOrder="99"
+             parent="BrunoDuarte_Blog::main_menu"
+             action="adminhtml/system_config/edit/section/blog"
+             resource="BrunoDuarte_Blog::blog_configuration"/>
+    </menu>
+</config>
