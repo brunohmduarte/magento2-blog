@@ -32,46 +32,43 @@ class Save extends Action
     {
         $resultRedirect = $this->resultRedirectFactory->create();
         $data = $this->getRequest()->getPostValue('author');
-
+// var_dump($this->getRequest()->getParam('back')); exit;
         try {
             /** @var \BrunoDuarte\Blog\Model\Author $author */
             $author = $this->_objectManager->create(Author::class);
             $date = $this->date->gmtDate();
             $id = (int) $data['author_id'];
 
-            if ($id) {
-                $postdata = array(
-                    'name' => $data['name'],
-                    'about' => $data['about'],
-                    // 'image_path' = $data['image_path'],
-                    'updated_at' => $date
-                );
-
-                $author->load($id)->setData($postdata)->save(); // <---- Verificar com funciona o  update
-
+            if ($id > 0) {
+                $author->load($id);
+                $data['updated_at'] = $date;
             } else {
-                $postdata = array(
-                    'name' => $data['name'],
-                    'about' => $data['about'],
-                    // 'image_path' = $data['image_path'],
-                    'created_at' => $date,
-                    'updated_at' => $date
-                );
-
-                $author->setData($postdata)->save();
+                unset($data['author_id']);
+                $data['created_at'] = $date;
+                $data['updated_at'] = $date;
             }
 
-            $this->messageManager->addSuccessMessage(__('The Author has been saved.'));
-            return $resultRedirect->setPath('*/*/index');
+            $author->setData($data);
+            $author->save();
 
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(nl2br($e->getMessage()));
             return $resultRedirect->setPath('*/*/edit');
         }
 
-        if ($this->getRequest()->getParam('back')) {
-            $this->messageManager->addSuccessMessage(__('The Author has been saved.'));
-            return $resultRedirect->setPath('*/*/index', ['author_id' => $id, '_current' => true]);
+        /**
+         * @todo Verificar o redirecionamento correto do salvar e permanecer na tela de editar ou grid.
+         */
+        $redirectState = $this->getRequest()->getParam('back');
+        if (!empty($redirectState) && $redirectState[0] == 'edit') {
+            $this->messageManager->addSuccessMessage(__('The Author has been updated with success.'));
+            return $resultRedirect->setPath('*/*/edit', ['author_id' => $id, '_current' => true]);
         }
+
+        if (empty($redirectState)) {
+            $this->messageManager->addSuccessMessage(__('The Author has been saved with success.'));
+            return $resultRedirect->setPath('*/*/index');
+        }
+
     }
 }

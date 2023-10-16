@@ -57,5 +57,14 @@ class Author extends AbstractModel implements IdentityInterface
         return $this->getData(self::ENTITY_ID, $id);
     }
 
+    public function saveOrUpdate(Array $data)
+    {
+        $date = $this->date->gmtDate();
+        $id = (int) $data['author_id'];
+        if ($id > 0) {
+            // altera
+        }
+    }
+
 }
 

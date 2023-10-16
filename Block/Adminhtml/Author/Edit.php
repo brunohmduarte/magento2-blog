@@ -9,6 +9,9 @@ use BrunoDuarte\Blog\Model\Author;
 
 class Edit extends Container
 {
+    const ACTION_DELETE_URL = 'delete';
+    const ACTION_EDIT_URL = 'edit';
+
     /**
      * @var Registry
      */
@@ -49,22 +52,35 @@ class Edit extends Container
                         'target' => '#edit_form'
                     ]
                 ]
-            ]
-        ], -100);
+            ],
+            'onclick' => $this->getEditPageUrl(self::ACTION_EDIT_URL)
+        ],
+        -100);
 
         $this->buttonList->add(
             'delete',
             [
                 'label' => __('Delete'),
                 'class' => 'delete',
-                'onclick' => "setLocation('{$this->getUrl('blog/author/delete', [
-                    'id' => $this->getCurrentAuthor()->getId(),
-                    '_current' => true,
-                    'back' => 'edit'
-                ])}')",
+                'onclick' => 'deleteConfirm(\''
+                    . __('Are you sure you want to delete this author?')
+                    . '\', \'' . $this->getEditPageUrl(self::ACTION_DELETE_URL) . '\')',
             ],
             -101
         );
+        // $this->buttonList->add(
+        //     'delete',
+        //     [
+        //         'label' => __('Delete'),
+        //         'class' => 'delete',
+        //         'onclick' => "setLocation('{$this->getUrl('blog/author/delete', [
+        //             'id' => $this->getCurrentAuthor()->getId(),
+        //             '_current' => true,
+        //             'back' => 'edit'
+        //         ])}')",
+        //     ],
+        //     -101
+        // );
     }
 
     /**
@@ -90,4 +106,25 @@ class Edit extends Container
     {
         return $this->coreRegistry->registry('brunoduarte_blog_author');
     }
+
+    /**
+    * Get URL for delete button
+    *
+    * @return string
+    */
+   public function getDeleteUrl()
+   {
+       return $this->getUrl('*/*/delete', ['id'=>$this->getRequest()->getParam('id')]);
+   }
+
+   /**
+   * Get URL for Edit Page with Action currect.
+   *
+   * @return string
+   */
+  public function getEditPageUrl(String $action)
+  {
+      return $this->getUrl("*/*/{$action}", ['id'=>$this->getRequest()->getParam('id')]);
+  }
+
 }
