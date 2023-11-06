@@ -99,6 +99,7 @@ class Author extends Generic implements TabInterface
         $form = $this->_formFactory->create();
         $form->setHtmlIdPrefix('author_');
         $form->setFieldNameSuffix('author');
+
         $fieldset = $form->addFieldset('base_fieldset', [
             'legend' => __('Author Information'),
             'class' => 'fieldset-wide'
